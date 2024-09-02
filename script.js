@@ -2,9 +2,12 @@ console.log('Hello World');
 
 container = document.querySelector('.container');
 
-for (let i = 0; i < 256; i++) {
+let gridsize = 10;
+
+for (let i = 0; i < gridsize ** 2; i++) {
     gridbox = document.createElement('div');
     gridbox.classList.add('gridbox');
+    gridbox.style.width = `${100 / gridsize}%`;
     container.appendChild(gridbox);
 }
 
