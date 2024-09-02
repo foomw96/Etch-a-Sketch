@@ -1,3 +1,16 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: space-evenly;
+    text-align: center;
+
+    height: 100vh;
+    margin: 0;
+
+    gap: 1em;
+}
+
 .container {
     text-align: center;
     border: solid grey 5px;

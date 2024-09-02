@@ -1,7 +1,7 @@
 console.log('Hello World');
 
-container = document.querySelector('.container');
-sizeForm = document.querySelector('#sizeForm');
+const container = document.querySelector('.container');
+const sizeForm = document.querySelector('#sizeForm');
 
 let gridsize = 16;
 generateGrid(gridsize);
@@ -15,6 +15,20 @@ document.addEventListener('mousedown', () => {
 
 document.addEventListener('mouseup', () => {
     isMouseDown = false;
+});
+
+let gridlinesCheckbox = document.querySelector('#showGridLines');
+
+gridlinesCheckbox.addEventListener('change', ()=>{
+    if (gridlinesCheckbox.checked) {
+        document.querySelectorAll('.gridbox').forEach(element => {
+            element.style.border = 'solid 0.1px black'; 
+        });
+    } else { 
+        document.querySelectorAll('.gridbox').forEach(element => {
+            element.style.border = '0'; 
+        });
+    }
 });
 
 /* On button click, change grid size according to the input size*/
@@ -34,7 +48,7 @@ function generateGrid(size) {
 
     /* Generate gridboxes based on input grid size */
     for (let i = 0; i < size ** 2; i++) {
-        gridbox = document.createElement('div');
+        const gridbox = document.createElement('div');
         gridbox.classList.add('gridbox');
         gridbox.style.width = `${100 / size}%`;
         container.appendChild(gridbox);
@@ -42,7 +56,8 @@ function generateGrid(size) {
 
     /* Add event listener to all gridboxes, to allow for coloring */
     /* colors the grid box if mousedown, or if mousedown and hovered over*/
-    gridboxes = document.querySelectorAll('.gridbox')
+    gridboxes = document.querySelectorAll('.gridbox');
+
     gridboxes.forEach((gridbox) => {
         gridbox.addEventListener('mouseover', () => {
             if (isMouseDown) {
