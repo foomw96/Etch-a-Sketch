@@ -7,6 +7,12 @@
     <title>Etch-a-Sketch</title>
 </head>
 <body>
+    <form id ="sizeForm" action="" style="text-align: center; margin: 2em;">
+        <label for="inputSize">Grid Size:</label>
+        <input id ="inputSize" type="number" min ='1' max='100' value="16" required>
+        <button type='submit' id="submitBtn">Change</button>
+    </form>
+
     <div class="container"></div>
     <script src="script.js"></script>    
 </body>

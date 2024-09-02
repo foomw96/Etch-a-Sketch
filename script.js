@@ -1,16 +1,12 @@
 console.log('Hello World');
 
 container = document.querySelector('.container');
+sizeForm = document.querySelector('#sizeForm');
 
-let gridsize = 10;
+let gridsize = 16;
+generateGrid(gridsize);
 
-for (let i = 0; i < gridsize ** 2; i++) {
-    gridbox = document.createElement('div');
-    gridbox.classList.add('gridbox');
-    gridbox.style.width = `${100 / gridsize}%`;
-    container.appendChild(gridbox);
-}
-
+/* Flag to allow for coloring when mouse button is held down */
 let isMouseDown = false;
 
 document.addEventListener('mousedown', () => {
@@ -21,16 +17,41 @@ document.addEventListener('mouseup', () => {
     isMouseDown = false;
 });
 
-gridboxes = document.querySelectorAll('.gridbox')
+/* On button click, change grid size according to the input size*/
+sizeForm.addEventListener('submit', (event) => {
+    /* this line is so important, if not the page will just refresh*/
+    event.preventDefault();
 
-gridboxes.forEach((gridbox) => {
-    gridbox.addEventListener('mouseover', () => {
-        if (isMouseDown) {
-            gridbox.style.backgroundColor = 'black';
-        }
-    });
-
-    gridbox.addEventListener('mousedown', () => {
-        gridbox.style.backgroundColor = 'black';
-    });
+    let inputSize = parseInt(document.querySelector('#inputSize').value);
+    generateGrid(inputSize);
 });
+
+function generateGrid(size) {
+    /* Delete all existing gridboxes */
+    document.querySelectorAll('.gridbox').forEach(element => {
+        element.remove();
+    });
+
+    /* Generate gridboxes based on input grid size */
+    for (let i = 0; i < size ** 2; i++) {
+        gridbox = document.createElement('div');
+        gridbox.classList.add('gridbox');
+        gridbox.style.width = `${100 / size}%`;
+        container.appendChild(gridbox);
+    }
+
+    /* Add event listener to all gridboxes, to allow for coloring */
+    /* colors the grid box if mousedown, or if mousedown and hovered over*/
+    gridboxes = document.querySelectorAll('.gridbox')
+    gridboxes.forEach((gridbox) => {
+        gridbox.addEventListener('mouseover', () => {
+            if (isMouseDown) {
+                gridbox.style.backgroundColor = 'black';
+            }
+        });
+
+        gridbox.addEventListener('mousedown', () => {
+            gridbox.style.backgroundColor = 'black';
+        });
+    });
+}
