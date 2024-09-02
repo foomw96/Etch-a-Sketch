@@ -28,7 +28,10 @@ body {
 
 .gridbox {
     aspect-ratio: 1 / 1;
-    box-sizing: border-box;
+    box-sizing: border-box;   
+}
+
+.bordered {
     border: 0.1px solid black;
 }
 

@@ -2,6 +2,7 @@ console.log('Hello World');
 
 const container = document.querySelector('.container');
 const sizeForm = document.querySelector('#sizeForm');
+const gridlinesCheckbox = document.querySelector('#showGridLines');
 
 let gridsize = 16;
 generateGrid(gridsize);
@@ -17,18 +18,10 @@ document.addEventListener('mouseup', () => {
     isMouseDown = false;
 });
 
-let gridlinesCheckbox = document.querySelector('#showGridLines');
-
 gridlinesCheckbox.addEventListener('change', ()=>{
-    if (gridlinesCheckbox.checked) {
-        document.querySelectorAll('.gridbox').forEach(element => {
-            element.style.border = 'solid 0.1px black'; 
-        });
-    } else { 
-        document.querySelectorAll('.gridbox').forEach(element => {
-            element.style.border = '0'; 
-        });
-    }
+    document.querySelectorAll('.gridbox').forEach(element => {
+        element.classList.toggle('bordered', gridlinesCheckbox.checked);
+    });
 });
 
 /* On button click, change grid size according to the input size*/
@@ -59,6 +52,10 @@ function generateGrid(size) {
     gridboxes = document.querySelectorAll('.gridbox');
 
     gridboxes.forEach((gridbox) => {
+
+        // toggle borders depending on whether its checked
+        gridbox.classList.toggle('bordered', gridlinesCheckbox.checked);
+
         gridbox.addEventListener('mouseover', () => {
             if (isMouseDown) {
                 gridbox.style.backgroundColor = 'black';
