@@ -5,6 +5,7 @@ const sizeForm = document.querySelector('#sizeForm');
 const gridlinesCheckbox = document.querySelector('#showGridLines');
 const colorPicker = document.querySelector('#colorPicker');
 const h1 = document.querySelector('h1');
+const randomColor = document.querySelector('#randomColor');
 
 let gridsize = 16;
 generateGrid(gridsize);
@@ -45,12 +46,20 @@ colorPicker.addEventListener('input', () => {
     document.querySelectorAll('.gridbox').forEach(element => {
         element.addEventListener('mouseover', () => {
             if (isMouseDown) {
-                element.style.backgroundColor = color;
+                if (randomColor.checked){
+                    element.style.backgroundColor = getRandomColor();
+                } else {
+                    element.style.backgroundColor = color;
+                }
             }
         });
     
         element.addEventListener('mousedown', () => {
-            element.style.backgroundColor = color;
+            if (randomColor.checked){
+                element.style.backgroundColor = getRandomColor();
+            } else {
+                element.style.backgroundColor = color;
+            }
         });
     });
 });
@@ -80,12 +89,29 @@ function generateGrid(size) {
 
         gridbox.addEventListener('mouseover', () => {
             if (isMouseDown) {
-                gridbox.style.backgroundColor = colorPicker.value;
+                if (randomColor.checked){
+                    gridbox.style.backgroundColor = getRandomColor();
+                } else {
+                    gridbox.style.backgroundColor = colorPicker.value;
+                }
             }
         });
 
         gridbox.addEventListener('mousedown', () => {
-            gridbox.style.backgroundColor = colorPicker.value;
+            if (randomColor.checked){
+                gridbox.style.backgroundColor = getRandomColor();
+            } else {
+                gridbox.style.backgroundColor = colorPicker.value;
+            }
         });
     });
+}
+
+function getRandomColor() {
+    const letters = '0123456789ABCDEF';
+    let color = '#';
+    for (let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
 }
