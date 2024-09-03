@@ -3,6 +3,7 @@ console.log('Hello World');
 const container = document.querySelector('.container');
 const sizeForm = document.querySelector('#sizeForm');
 const gridlinesCheckbox = document.querySelector('#showGridLines');
+const colorPicker = document.querySelector('#colorPicker');
 
 let gridsize = 16;
 generateGrid(gridsize);
@@ -33,6 +34,24 @@ sizeForm.addEventListener('submit', (event) => {
     generateGrid(inputSize);
 });
 
+// Overlap existing event listener for coloring gridboxes declared in generateGrid(), when color picker value changes
+colorPicker.addEventListener('change', () => {
+
+    color = colorPicker.value;
+
+    document.querySelectorAll('.gridbox').forEach(element => {
+        element.addEventListener('mouseover', () => {
+            if (isMouseDown) {
+                element.style.backgroundColor = color;
+            }
+        });
+    
+        element.addEventListener('mousedown', () => {
+            element.style.backgroundColor = color;
+        });
+    });
+});
+
 function generateGrid(size) {
     /* Delete all existing gridboxes */
     document.querySelectorAll('.gridbox').forEach(element => {
@@ -58,12 +77,12 @@ function generateGrid(size) {
 
         gridbox.addEventListener('mouseover', () => {
             if (isMouseDown) {
-                gridbox.style.backgroundColor = 'black';
+                gridbox.style.backgroundColor = colorPicker.value;
             }
         });
 
         gridbox.addEventListener('mousedown', () => {
-            gridbox.style.backgroundColor = 'black';
+            gridbox.style.backgroundColor = colorPicker.value;
         });
     });
 }
