@@ -4,6 +4,7 @@ const container = document.querySelector('.container');
 const sizeForm = document.querySelector('#sizeForm');
 const gridlinesCheckbox = document.querySelector('#showGridLines');
 const colorPicker = document.querySelector('#colorPicker');
+const h1 = document.querySelector('h1');
 
 let gridsize = 16;
 generateGrid(gridsize);
@@ -35,9 +36,11 @@ sizeForm.addEventListener('submit', (event) => {
 });
 
 // Overlap existing event listener for coloring gridboxes declared in generateGrid(), when color picker value changes
-colorPicker.addEventListener('change', () => {
+colorPicker.addEventListener('input', () => {
 
     color = colorPicker.value;
+
+    h1.style.color = color;
 
     document.querySelectorAll('.gridbox').forEach(element => {
         element.addEventListener('mouseover', () => {

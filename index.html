@@ -8,18 +8,19 @@
 </head>
 <body>
     
-    <form id ="sizeForm" action="">
-        <label for="inputSize">Grid Size:</label>
-        <input id ="inputSize" type="number" min ='1' max='100' value="16" required>
-        <button type='submit' id="submitBtn">Change</button>
-    </form>
-
-    <div>
-        <input id="showGridLines" type="checkbox" checked> Show gridlines
-    </div>
-
-    <div>
-        <input id='colorPicker' type="color"> Pen Color
+    <div class="controls">
+        <h1>ETCH-A-SKETCH</h1>
+        <form id ="sizeForm" action="">
+            <label for="inputSize">Grid Size:</label>
+            <input id ="inputSize" type="number" min ='1' max='100' value="16" required>
+            <button type='submit' id="submitBtn">Change</button>
+        </form>
+        <div>
+            <input id="showGridLines" type="checkbox"> Show gridlines
+        </div>
+        <div>
+            <input id='colorPicker' type="color"> Pen Color
+        </div>
     </div>
 
     <div class="container"></div>
